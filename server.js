@@ -4,10 +4,9 @@ var path = require('path');
 
 var articleOne = {
     title : 'Article One | Akhil',
-    date : 'Feb 15 2018',
     heading : 'Article One',
+    date : 'Feb 15 2018',
     content:`
-          <hr>
           <p>
               Hi! This is Akhil .This my first article on IMAD App :)
           </p>
@@ -31,7 +30,10 @@ var htmlTemplate = `
 <div class="container">
   <h1>${heading}</h1>
   <p>${date}</p>
-    ${content}
+  <hr/>
+  <div>
+            ${content}
+    </div>
 </div>
 </body>
 </html>
@@ -47,7 +49,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/article-one', function (req,res){
-     res.send(articleOne)
+     res.send(createTemplate(articleOne));
 });
 
 app.get('/article-two', function (req,res){
