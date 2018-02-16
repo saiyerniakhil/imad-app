@@ -2,15 +2,30 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 
-var articleOne = {
+var articles  = { 
+    'article-one' : {
     title : 'Article One | Akhil',
     heading : 'Article One',
     date : 'Feb 15 2018',
     content:`
           <p>
               Hi! This is Akhil .This my first article on IMAD App :)
-          </p>
-        `
+          </p> `
+    },
+    'article-two' : {
+    title : 'Article Two | Akhil',
+    heading :'Article Two',
+    date : 'Feb 16 2018',
+    content : ` <p>This is my second aricle in my Web Application.</p>`
+    },
+    'article-three' : {
+    title : 'Article Three | Akhil',
+    heading :'Article Three',
+    date : 'Feb 16 2018',
+    content : ` <p>
+              Hi! This is Akhil .This my third article on IMAD App :)
+          </p>`
+    }    
 };
 function createTemplate (data) {
     var title= data.title;
@@ -48,8 +63,9 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/article-one', function (req,res){
-     res.send(createTemplate(articleOne));
+app.get('/:articleName', function (req,res){
+     var articleName = req.params.articleName;
+     res.send(createTemplate(articles(articleName)));
 });
 
 app.get('/article-two', function (req,res){
