@@ -2,6 +2,43 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 
+var articleOne = {
+    title : 'Article One | Akhil',
+    date : 'Feb 15 2018',
+    heading : 'Article One',
+    content:`
+          <hr>
+          <p>
+              Hi! This is Akhil .This my first article on IMAD App :)
+          </p>
+        `
+};
+function createTemplate (data) {
+    var title= data.title;
+    var heading = data.heading;
+    var date = data.date;
+    var content = data.content;
+    
+var htmlTemplate = `
+<html>
+<head>
+<title> ${title} </title>
+<meta name="viewport" content = "width=device-width , initial-scale=1">
+<link rel="stylesheet" type="text/css" href="ui/style.css">
+</head>
+
+<body>
+<div class="container">
+  <h1>${heading}</h1>
+  <p>${date}</p>
+    ${content}
+</div>
+</body>
+</html>
+`;
+ return htmlTemplate;   
+}
+
 var app = express();
 app.use(morgan('combined'));
 
@@ -10,7 +47,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/article-one', function (req,res){
-     res.sendFile(path.join(__dirname, 'ui', 'article-one.html'));
+     res.send(articleOne)
 });
 
 app.get('/article-two', function (req,res){
