@@ -7,6 +7,7 @@ var counter = 0;
     //capture the counter and store it in a variable 
             request.onreadystatechange = function () {
                 if(request.readyState == XMLHttpRequest.DONE) {
+                    // take some action i.e. print count 
                     var counter = request.responseText;
                     var span = document.getElementById('count');
                     span.innerHTML = counter.toString();
