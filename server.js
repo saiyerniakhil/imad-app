@@ -70,6 +70,15 @@ app.get('/counter',function (req,res){
     res.send(`Clicks ${counter.toString()}`);
 });
 
+var names =[];
+app.get('/submit-name/', function(req ,res){ //URL : submit-name?name=xxxxxx
+   //get the name from the request somehow
+   var name = req.query.name;
+   names.push(name);
+   //JSON : JavaScript Object Notation - Its a way of converting JavaScript Objects into Strings
+   res.sendFile(JSON.stringify(name)); 
+});
+
 app.get('article/:articleName', function (req,res){
      var articleName = req.params.articleName;
      res.send(createTemplate(articles[articleName]));
@@ -87,6 +96,8 @@ app.get('/ui/main.js', function (req, res) {
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
+
+
 
 
 // Do not change port, otherwise your app won't run on IMAD servers
