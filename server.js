@@ -76,7 +76,7 @@ app.get('/submit-name/', function(req ,res){ //URL : submit-name?name=xxxxxx
    var name = req.query.name;
    names.push(name);
    //JSON : JavaScript Object Notation - Its a way of converting JavaScript Objects into Strings
-   res.sendFile(JSON.stringify(name)); 
+   res.send(JSON.stringify(name)); 
 });
 
 app.get('article/:articleName', function (req,res){
