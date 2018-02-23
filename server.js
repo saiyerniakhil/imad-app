@@ -67,7 +67,7 @@ var counter = 0;
 app.get('/counter',function (req,res){
 
     counter = counter + 1;
-    res.send(`CLicks ${counter.toString()}`);
+    res.send(`Clicks ${counter.toString()}`);
 });
 
 app.get('article/:articleName', function (req,res){
