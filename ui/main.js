@@ -23,8 +23,7 @@ var counter = 0;
 };
 
 //getting name input
-var nameInput = document.getElementById('name');
-var name = nameInput.value;
+
 var submit = document.getElementById('submit_btn');
 submit.onclick = function () {
     //make a request to the server and print the name
@@ -50,6 +49,8 @@ submit.onclick = function () {
         };
     
     //make the request
+    var nameInput = document.getElementById('name');
+    var name = nameInput.value;
     request.open('GET','http://akhilsai831.imad.hasura-app.io/submit-name?name='+name,true);
     request.send(null);
     //capture a list of names  and reneder them 
