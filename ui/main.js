@@ -28,14 +28,29 @@ var name = nameInput.value;
 var submit = document.getElementById('submit_button');
 submit.onclick = function () {
     //make a request to the server and print the name
-    
-    //capture a list of names  and reneder them 
-    var names = ['name1','name2','name3'];
-    var list= '';
-    for (var i = 0;i<names.length;i++){
-        list += '<li>'+names[i]+'</li>';
-    }
+     //create a request object 
+        var request = new XMLHttpRequest();
+    //capture the counter and store it in a variable 
+            request.onreadystatechange = function () {
+                if(request.readyState === XMLHttpRequest.DONE) {
+                    // take some action i.e. print count 
+                    if(request.status === 200) {
+                        var names = ['name1','name2','name3'];
+                        var list= '';
+                        for (var i = 0;i<names.length;i++){
+                            list += '<li>'+names[i]+'</li>';
+                        }
     
     var ul =document.getElementById('nameslist');
     ul.innerHTML = list;
+                    }
+                }
+        // if XMLHttpRequest is NOT Done
+        };
+    
+    //make the request
+    request.open('GET','http://akhilsai831.imad.hasura-app.io/submit-name?name='+name,true);
+    request.send(null);
+    //capture a list of names  and reneder them 
+    
 };
