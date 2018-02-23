@@ -6,7 +6,7 @@ var counter = 0;
         var request = new XMLHttpRequest();
     //capture the counter and store it in a variable 
             request.onreadystatechange = function () {
-                if(request.readyState == XMLHttpRequest.DONE) {
+                if(request.readyState === XMLHttpRequest.DONE) {
                     // take some action i.e. print count 
                     if(requestStatus == 200) {
                     var counter = request.responseText;
