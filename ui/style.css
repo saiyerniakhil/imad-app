@@ -25,3 +25,7 @@ body {
     padding-right:30px;
     max-width:800px;
 }
+.comment {
+    width: 100%;
+    height:150px;
+}
