@@ -25,7 +25,7 @@ var counter = 0;
 //getting name input
 var nameInput = document.getElementById('name');
 var name = nameInput.value;
-var submit = document.getElementById('submit_btn');
+var submit = document.getElementById('submit_button');
 submit.onclick = function () {
     //make a request to the server and print the name
     
