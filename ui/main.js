@@ -25,7 +25,7 @@ var counter = 0;
 //getting name input
 var nameInput = document.getElementById('name');
 var name = nameInput.value;
-var submit = document.getElementById('submit_button');
+var submit = document.getElementById('submit_btn');
 submit.onclick = function () {
     //make a request to the server and print the name
      //create a request object 
@@ -42,8 +42,8 @@ submit.onclick = function () {
                             list += '<li>'+names[i]+'</li>';
                         }
     
-    var ul =document.getElementById('nameslist');
-    ul.innerHTML = list;
+                var ul =document.getElementById('nameslist');
+                ul.innerHTML = list;
                     }
                 }
         // if XMLHttpRequest is NOT Done
