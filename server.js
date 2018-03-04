@@ -8,7 +8,7 @@ var path = require('path');
         database : 'akhilsai831',
         host : 'db.imad.hasura-app.io',
         port : '5432',
-        password : process.env.DB_PASSWORD
+        password : 'db-akhilsai831-41766'
     };
 var articles  = { 
     'article-one' : {
