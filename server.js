@@ -2,7 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var Pool = require('pg').Pool;
 var path = require('path');
-
+var crypto = require('crypto');
     var config = {
         user: 'akhilsai831',
         database : 'akhilsai831',
@@ -10,31 +10,6 @@ var path = require('path');
         port : '5432',
         password : 'db-akhilsai831-41766'
     };
-var articles  = { 
-    'article-one' : {
-    title : 'Article One | Akhil',
-    heading : 'Article One',
-    date : 'Feb 15 2018',
-    content:`
-          <p>
-              Hi! This is Akhil .This my first article on IMAD App :)
-          </p> `
-    },
-    'article-two' : {
-    title : 'Article Two | Akhil',
-    heading :'Article Two',
-    date : 'Feb 16 2018',
-    content : ` <p>This is my second aricle in my Web Application.</p>`
-    },
-    'article-three' : {
-    title : 'Article Three | Akhil',
-    heading :'Article Three',
-    date : 'Feb 16 2018',
-    content : ` <p>
-              Hi! This is Akhil .This my third article on IMAD App :)
-          </p>`
-    }    
-};
 function createTemplate (data) {
     var title= data.title;
     var heading = data.heading;
@@ -99,6 +74,15 @@ app.get('/submit-name/', function(req ,res){ //URL : submit-name?name=xxxxxx
    names.push(name);
    //JSON : JavaScript Object Notation - Its a way of converting JavaScript Objects into Strings
    res.send(JSON.stringify(names)); 
+});
+
+function hash(input ,salt){
+    var hashed = crypto.pbkdf2(input, salt, 100000, 64, 'sha512');
+    return hashed.toString('hex');
+}
+app.get('/hash/:input', function(req,res) {
+    var hashedString = hash(req.params.input ,'this-is-some-random-string');
+    res.send(hashedString);
 });
 
 app.get('/articles/:articleName', function (req,res){
