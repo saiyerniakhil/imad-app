@@ -8,7 +8,7 @@ var crypto = require('crypto');
         database : 'akhilsai831',
         host : 'db.imad.hasura-app.io',
         port : '5432',
-        password : 'db-akhilsai831-41766'
+        password : process.env.DB_PASSWORD
     };
 function createTemplate (data) {
     var title= data.title;
@@ -77,7 +77,7 @@ app.get('/submit-name/', function(req ,res){ //URL : submit-name?name=xxxxxx
 });
 
 function hash(input ,salt){
-    var hashed = crypto.pbkdf2(input, salt, 100000, 64, 'sha512');
+    var hashed = crypto.pbkdf2Sync(input, salt, 100000, 64, 'sha512');
     return hashed.toString('hex');
 }
 app.get('/hash/:input', function(req,res) {
