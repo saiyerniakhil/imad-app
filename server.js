@@ -85,7 +85,10 @@ app.post('/login', function (req,res){
                 var salt = dbString.split('$')[2];
                 var hashedPassowrd = hash(passowrd ,salt ); //creating a hash based on the prev salt value
                 if(hashedPassword === dbString) {
+                                        //Set a Session
+                    req.session.auth = {userId:result.rows[0].id};
                     res.send('credentials are correct');
+
                 }else{
                      res.send(403).send('username/password is invalid');
                 }
@@ -93,6 +96,11 @@ app.post('/login', function (req,res){
             }
         }
     });
+});
+
+app.get('/logout' , function(req,res) {
+    delete req.sessio.auth;
+    alert('logged out successfully');
 });
 var pool = new Pool(config); 
 app.get('test-db',function(req,res){
@@ -170,3 +178,4 @@ var port = 80;
 app.listen(port, function () {
   console.log(`IMAD course app listening on port ${port}!`);
 });
+
