@@ -1,6 +1,6 @@
 var button = document.getElementById('counter');
 
-var counter = 0;
+/*var counter = 0;
     button.onclick = function () {
     //create a request object 
         var request = new XMLHttpRequest();
@@ -20,11 +20,10 @@ var counter = 0;
     //make the request
     request.open('GET','http://akhilsai831.imad.hasura-app.io/counter',true);
     request.send(null);
-};
+};*/
 
 //getting name input
-
-var submit = document.getElementById('submit_btn');
+/*var submit = document.getElementById('submit_btn');
 submit.onclick = function () {
     //make a request to the server and print the name
      //create a request object 
@@ -47,12 +46,32 @@ submit.onclick = function () {
                 }
         // if XMLHttpRequest is NOT Done
         };
-    
+*/    
+    var submit = document.getElementById('submit_btn');
+submit.onclick = function () {
+    //make a request to the server and print the name
+     //create a request object 
+        var request = new XMLHttpRequest();
+    //capture the counter and store it in a variable 
+            request.onreadystatechange = function () {
+                if(request.readyState === XMLHttpRequest.DONE) {
+                    // take some action i.e. print count 
+                    if(request.status === 200) {
+                    console.log('user logged in');
+                    alert('logged in succesfully ');
+                    }else if (request.status === 403) {
+                        alert('username/password is not correct');
+                    }else if (request.status === 500) {
+                        alert('something went wrong on the server');
+                    }
+                }
+        // if XMLHttpRequest is NOT Done
+        };
     //make the request
-    var nameInput = document.getElementById('name');
-    var name = nameInput.value;
-    request.open('GET','http://akhilsai831.imad.hasura-app.io/submit-name?name='+name,true);
-    request.send(null);
-    //capture a list of names  and reneder them 
-    
+    var username = document.getElementById('username').value;
+    var password = document.getElementById('password').value;
+    console.log(username);
+    console.log(passowrd);
+    request.open('POST','http://akhilsai831.imad.hasura-app.io/login',true );
+    request.setRequestHeader('Content-Type', 'application/json'); 
 };
