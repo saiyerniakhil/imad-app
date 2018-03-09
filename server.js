@@ -52,13 +52,39 @@ app.get('/', function (req, res) {
 app.post('/create-user',function (req,res){
     var username = req.body.username;
     var passowrd = req.body.password;
-    var salt = crypto.getRandomBytes(128).toString('hex');
+    var salt = crypto.randomBytes(128).toString('hex');
     var dbString = hash(password,salt);
     pool.query('INSERT INTO "user" (username,password) VALUES ($1,$2)',[username , dbString], function (err, result){
          if(err) {
             res.status(500).send(err.toString());
         } else {
             res.send('user successfully created'+ username);
+        }
+    });
+});
+
+app.post('/login', function (req,res){
+     var username = req.body.username;
+    var passowrd = req.body.password;
+
+    pool.query('SELECT * FROM "user" username= $1',[username], function (err, result){
+         if(err) {
+            res.status(500).send(err.toString());
+        } else {
+            if(result.rows.length === 0){
+                res.send(403).send('username/password is invalid');
+            }else{
+                //Match the password
+                var dbString =result.rows[0].passowrd;
+                var salt = dbString.split('$')[2];
+                var hashedPassowrd = hash(passowrd ,salt ); //creating a hash based on the prev salt value
+                if(hashedPassword = dbString) {
+                    res.send('credentials are correct');
+                }else{
+                     res.send(403).send('username/password is invalid');
+                }
+                res.send('user successfully created'+ username);
+            }
         }
     });
 });
